@@ -136,49 +136,78 @@ public class InteractionActivity extends SecureActivity {
 
     // ---------- Interprétation ----------
     private void evaluate(String a, String b, FetchResult first, FetchResult second) {
-        if (first.status == STATUS_NETWORK || second.status == STATUS_NETWORK) {
-            showBilingual(getString(R.string.result_error_network_fr),
-                    getString(R.string.result_error_network_ar), "", null,
-                    R.color.warn_bg, R.color.warn_fg);
+        boolean networkError = first.status == STATUS_NETWORK || second.status == STATUS_NETWORK;
+        boolean httpError = first.status == STATUS_HTTP || second.status == STATUS_HTTP;
+        boolean emptyResult = first.status == STATUS_EMPTY || second.status == STATUS_EMPTY;
+        boolean missingDrug = first.status == STATUS_NOT_FOUND || second.status == STATUS_NOT_FOUND;
+
+        if (networkError) {
+            showTinted(InteractionOutcome.Tone.GRAY,
+                    getString(R.string.result_error_network_fr),
+                    getString(R.string.result_error_network_ar), "", null);
             return;
         }
-        if (first.status == STATUS_HTTP || second.status == STATUS_HTTP) {
+        if (httpError) {
             int code = first.status == STATUS_HTTP ? first.code : second.code;
-            showBilingual(getString(R.string.result_error_http_fr, code),
-                    getString(R.string.result_error_http_ar, code), "", null,
-                    R.color.warn_bg, R.color.warn_fg);
+            showTinted(InteractionOutcome.Tone.ORANGE,
+                    getString(R.string.result_error_http_fr, code),
+                    getString(R.string.result_error_http_ar, code), "", null);
             return;
         }
-        if (first.status == STATUS_EMPTY || second.status == STATUS_EMPTY) {
-            showBilingual(getString(R.string.result_error_empty_fr),
-                    getString(R.string.result_error_empty_ar), "", null,
-                    R.color.warn_bg, R.color.warn_fg);
+        if (emptyResult) {
+            showTinted(InteractionOutcome.Tone.ORANGE,
+                    getString(R.string.result_error_empty_fr),
+                    getString(R.string.result_error_empty_ar), "", null);
             return;
         }
-        if (first.status == STATUS_NOT_FOUND || second.status == STATUS_NOT_FOUND) {
+        if (missingDrug) {
             String missing = first.status == STATUS_NOT_FOUND ? a : b;
-            showBilingual(getString(R.string.result_missing_fr, missing),
-                    getString(R.string.result_missing_ar, missing), "", null,
-                    R.color.warn_bg, R.color.warn_fg);
+            showTinted(InteractionOutcome.Tone.ORANGE,
+                    getString(R.string.result_missing_fr, missing),
+                    getString(R.string.result_missing_ar, missing), "", null);
             return;
         }
 
         String hit = snippet(first.text, b);
         if (hit == null) hit = snippet(second.text, a);
+        InteractionOutcome.Tone tone = InteractionOutcome.tone(
+                false, false, false, false, hit != null);
 
         if (hit == null) {
             // On ne dit PAS qu'il n'y a aucun risque : seulement qu'aucune interaction
-            // n'est mentionnée dans les notices consultées.
-            showBilingual(getString(R.string.result_no_mention_fr, a, b),
+            // n'est mentionnée dans les notices consultées. La carte passe au vert clair.
+            showTinted(tone,
+                    getString(R.string.result_no_mention_fr, a, b),
                     getString(R.string.result_no_mention_ar, a, b),
                     getString(R.string.result_no_risk_warning_fr) + "\n"
                             + getString(R.string.result_no_risk_warning_ar),
-                    null, R.color.info_bg, R.color.info_fg);
+                    null);
         } else {
             String excerpt = hit.replaceAll("\\s+", " ").trim();
-            showBilingual(getString(R.string.result_found_fr, a, b),
-                    getString(R.string.result_found_ar, a, b), "",
-                    excerpt, R.color.error_bg, R.color.error_fg);
+            showTinted(tone,
+                    getString(R.string.result_found_fr, a, b),
+                    getString(R.string.result_found_ar, a, b), "", excerpt);
+        }
+    }
+
+    /** Applique la teinte décidée par la logique pure, sans toucher aux textes FR/AR. */
+    private void showTinted(InteractionOutcome.Tone tone, String french, String arabic,
+                            String note, String excerpt) {
+        int[] palette = palette(tone);
+        showBilingual(french, arabic, note, excerpt, palette[0], palette[1]);
+    }
+
+    private int[] palette(InteractionOutcome.Tone tone) {
+        switch (tone) {
+            case RED:
+                return new int[]{R.color.error_bg, R.color.error_fg};
+            case GREEN:
+                return new int[]{R.color.ok_bg, R.color.ok_fg};
+            case GRAY:
+                return new int[]{R.color.network_bg, R.color.network_fg};
+            case ORANGE:
+            default:
+                return new int[]{R.color.warn_bg, R.color.warn_fg};
         }
     }
 

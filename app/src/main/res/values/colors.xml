@@ -15,4 +15,7 @@
     <color name="error_fg">#C62828</color>
     <color name="info_bg">#E3F2FD</color>
     <color name="info_fg">#1565C0</color>
+    <!-- Résultat d'interaction : gris pour une erreur réseau, vert pour "aucune mention". -->
+    <color name="network_bg">#ECEFF1</color>
+    <color name="network_fg">#546E7A</color>
 </resources>
