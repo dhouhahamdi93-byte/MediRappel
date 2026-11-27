@@ -19,6 +19,16 @@ interface bilingue français/arabe et vérification des interactions médicament
 - **MyMemory** : `GET https://api.mymemory.translated.net/get` (`MyMemoryApi.java`), via Retrofit + Gson. Le paramètre `langpair=en|ar` traduit l'extrait openFDA vers l'arabe ; cet appel est facultatif et n'influence pas l'authentification ni les rappels.
 - Aucune clé d'API n'est nécessaire pour ces deux services publics.
 
+## Architecture
+
+- **`LocalAuth.java`** : inscription et connexion locales via Room. Les accès base et les hashes tournent hors du thread principal, les callbacks reviennent sur le thread UI ; email déjà utilisé, email inconnu, mauvais mot de passe et erreur de stockage sont distingués.
+- **`PasswordHasher.java`** : sel aléatoire et PBKDF2 (SHA-256 sur API 26+, repli SHA-1 à 120 000 itérations sur API 24/25), comparaison en temps constant ; le mot de passe n'est jamais journalisé.
+- **`SessionManager.java`** : session persistée dans `SharedPreferences` (identifiant du compte et email), effacée lors de la déconnexion.
+- **`ReminderScheduler.java`** : programme une seule alarme à « enregistrement + 45 s » avec `setAlarmClock` si l'autorisation est donnée, sinon un repli approximatif ; réarme au redémarrage et annule les anciennes alarmes pour éviter les doublons.
+- **`FdaApi.java`** : client Retrofit/Gson vers openFDA qui lit `drug_interactions` ; `MyMemoryApi.java` traduit facultativement l'extrait anglais vers l'arabe.
+
+Les décisions sans dépendance Android (`AuthLogic`, `InteractionOutcome`, `MedicationNameValidator` et `ReminderScheduler.triggerAtFrom`) sont testables en JVM.
+
 ## Comment lancer
 
 Prérequis : Android Studio avec un SDK Android configuré dans `local.properties` (fichier ignoré par Git).
@@ -54,6 +64,7 @@ Il s'agit d'un APK **debug** signé avec la clé de debug d'Android Studio : con
 - Les comptes et les rappels sont stockés **uniquement sur l'appareil** : désinstaller l'application ou effacer ses données supprime tout.
 - **Aucune récupération de mot de passe** : en cas d'oubli, créez un nouveau compte local.
 - Aucune synchronisation entre appareils ; les emails sont des identifiants locaux, non vérifiés.
+- Une seule session locale est conservée à la fois : connecter un autre compte remplace la session courante dans `SessionManager`.
 - Sur API 24/25, le hachage utilise automatiquement PBKDF2WithHmacSHA1 (120 000 itérations) ; SHA-256 est utilisé sur API 26+.
 - Internet ne sert qu'à la vérification des interactions et à la traduction ; l'authentification fonctionne en mode avion.
 - Les notifications exactes à 45 secondes nécessitent l'autorisation « alarmes et rappels » sur Android 12+ ; sinon un rappel approximatif est utilisé.
