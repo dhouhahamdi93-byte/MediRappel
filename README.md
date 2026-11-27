@@ -8,9 +8,16 @@ interface bilingue français/arabe et vérification des interactions médicament
 - Inscription et connexion locales (Room + PBKDF2), sans serveur ni configuration à fournir.
 - Session persistée sur l'appareil, déconnexion et garde des écrans protégés.
 - Rappel de prise de médicament programmé à **maintenant + 45 secondes**, avec repli approximatif sur Android 12+ si les alarmes exactes ne sont pas autorisées.
-- Vérification des interactions médicamenteuses via openFDA, avec avertissement : le résultat ne remplace pas l'avis d'un médecin ou d'un pharmacien.
+- Vérification des interactions entre deux médicaments à partir des notices openFDA, avec avertissement : le résultat ne remplace pas l'avis d'un médecin ou d'un pharmacien.
+- Traduction facultative de l'extrait anglais vers l'arabe.
 - Interface français/arabe avec mise en page RTL.
 - Champs texte simplifiés : aucun clavier stylet système ne vient perturber la saisie.
+
+## API utilisées
+
+- **openFDA** : `GET https://api.fda.gov/drug/label.json` (`FdaApi.java`), via Retrofit + Gson. La requête recherche le nom générique ou la marque du médicament et lit le champ `drug_interactions` de la première notice. Une réponse 404, vide ou en échec réseau est traitée explicitement.
+- **MyMemory** : `GET https://api.mymemory.translated.net/get` (`MyMemoryApi.java`), via Retrofit + Gson. Le paramètre `langpair=en|ar` traduit l'extrait openFDA vers l'arabe ; cet appel est facultatif et n'influence pas l'authentification ni les rappels.
+- Aucune clé d'API n'est nécessaire pour ces deux services publics.
 
 ## Comment lancer
 
@@ -25,6 +32,23 @@ Prérequis : Android Studio avec un SDK Android configuré dans `local.propertie
 Ouvrez le projet dans Android Studio et lancez l'application sur un émulateur ou un appareil.
 `assembleDebugAndroidTest` compile les tests instrumentés sans les exécuter : aucun émulateur n'est nécessaire pour les commandes ci-dessus.
 
+## Comment installer l'APK
+
+L'APK généré se trouve ici (fichier ignoré par Git, non commité) :
+
+```text
+C:\Users\hamdi\Downloads\medirappel\app\build\outputs\apk\debug\app-debug.apk
+```
+
+- **Copie manuelle** : transférez le fichier sur l'appareil, ouvrez-le depuis un gestionnaire de fichiers et autorisez l'installation depuis cette source quand Android le demande.
+- **Via adb** (Android SDK `platform-tools`) :
+
+```powershell
+adb install -r C:\Users\hamdi\Downloads\medirappel\app\build\outputs\apk\debug\app-debug.apk
+```
+
+Il s'agit d'un APK **debug** signé avec la clé de debug d'Android Studio : convient aux tests, pas à une publication sur le Play Store. Si une version précédente a été installée avec une autre signature, désinstallez-la d'abord manuellement.
+
 ## Limites
 
 - Les comptes et les rappels sont stockés **uniquement sur l'appareil** : désinstaller l'application ou effacer ses données supprime tout.
@@ -32,6 +56,7 @@ Ouvrez le projet dans Android Studio et lancez l'application sur un émulateur o
 - Aucune synchronisation entre appareils ; les emails sont des identifiants locaux, non vérifiés.
 - Sur API 24/25, le hachage utilise automatiquement PBKDF2WithHmacSHA1 (120 000 itérations) ; SHA-256 est utilisé sur API 26+.
 - Internet ne sert qu'à la vérification des interactions et à la traduction ; l'authentification fonctionne en mode avion.
+- Les notifications exactes à 45 secondes nécessitent l'autorisation « alarmes et rappels » sur Android 12+ ; sinon un rappel approximatif est utilisé.
 
 ## Règles métier
 
