@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ميدي رابيل</string>
+    <string name="app_tagline">أدويتك، في وقتها</string>
+
+    <!-- Commun -->
+    <string name="action_cancel">إلغاء</string>
+    <string name="action_retry">إعادة المحاولة</string>
+    <string name="loading">جارٍ التحميل…</string>
+    <string name="error_network">خطأ في الاتصال: تحقق من اتصال الإنترنت.</string>
+    <string name="error_empty_response">استجابة فارغة أو غير متوقعة من الخدمة.</string>
+    <string name="error_unknown">حدث خطأ. أعد المحاولة.</string>
+    <string name="error_required_field">هذا الحقل مطلوب.</string>
+    <string name="error_exact_alarm_permission">اسمح بالتنبيهات الدقيقة في إعدادات Android لتلقّي التذكير بعد 45 ثانية من الحفظ.</string>
+    <string name="alarm_fallback_scheduled">لم تُسمح التنبيهات الدقيقة: تم جدولة التذكير بشكل تقريبي. اسمح بها في الإعدادات للحصول على 45 ثانية بالضبط.</string>
+    <string name="alarm_exact_enabled">تم تفعيل التنبيهات الدقيقة: سيُرسل التذكير بعد 45 ثانية من الحفظ.</string>
+
+    <!-- Connexion -->
+    <string name="login_title">مرحبًا بعودتك</string>
+    <string name="login_subtitle">سجّل الدخول لإدارة تذكيراتك.</string>
+    <string name="login_email_hint">البريد الإلكتروني</string>
+    <string name="login_password_hint">كلمة المرور</string>
+    <string name="login_button">تسجيل الدخول</string>
+    <string name="login_no_account">ليس لديك حساب؟</string>
+    <string name="login_register_link">إنشاء حساب</string>
+    <string name="login_error_empty">أدخل البريد الإلكتروني وكلمة المرور.</string>
+    <string name="login_error_empty_email">أدخل بريدك الإلكتروني.</string>
+    <string name="login_error_empty_password">أدخل كلمة المرور.</string>
+
+    <!-- Inscription -->
+    <string name="register_title">إنشاء حساب</string>
+    <string name="register_subtitle">بعض المعلومات للبدء.</string>
+    <string name="register_name_hint">الاسم الكامل</string>
+    <string name="register_email_hint">البريد الإلكتروني</string>
+    <string name="register_password_hint">كلمة المرور</string>
+    <string name="register_confirm_hint">تأكيد كلمة المرور</string>
+    <string name="register_button">إنشاء حسابي</string>
+    <string name="register_have_account">لديك حساب بالفعل؟</string>
+    <string name="register_login_link">تسجيل الدخول</string>
+    <string name="register_password_rules">8 أحرف على الأقل، مع حرف ورقم.</string>
+    <string name="register_error_empty">املأ جميع الحقول.</string>
+    <string name="register_error_empty_email">أدخل بريدك الإلكتروني.</string>
+    <string name="register_error_mismatch">كلمتا المرور غير متطابقتين.</string>
+    <string name="register_success">تم إنشاء الحساب بنجاح.</string>
+
+    <!-- Accueil -->
+    <string name="main_title">تذكيراتي</string>
+    <string name="main_user_label">متصل:</string>
+    <string name="main_interactions_button">التحقق من تفاعل دوائي</string>
+    <string name="main_settings_button">الإعدادات</string>
+    <string name="main_logout_button">تسجيل الخروج</string>
+    <string name="main_empty">لا توجد تذكيرات حاليًا.\nاضغط على + لإنشاء تذكير.</string>
+    <string name="main_add_reminder">تذكير جديد</string>
+    <string name="main_logout_success">تم تسجيل الخروج.</string>
+
+    <!-- Rappel -->
+    <string name="add_title_new">تذكير جديد</string>
+    <string name="add_title_edit">تعديل التذكير</string>
+    <string name="add_name_hint">اسم الدواء</string>
+    <string name="add_description_hint">الوصف (اختياري)</string>
+    <string name="add_note_60s">سيتم إرسال الإشعار بعد 45 ثانية بالضبط من الحفظ.</string>
+    <string name="add_save">حفظ</string>
+    <string name="add_update">تحديث</string>
+    <string name="add_saved">تم حفظ التذكير. الإشعار بعد 45 ثانية.</string>
+    <string name="add_updated">تم تحديث التذكير.</string>
+    <string name="add_error_name">اسم الدواء مطلوب.</string>
+    <string name="item_edit">تعديل</string>
+    <string name="item_delete">حذف</string>
+    <string name="item_scheduled">⏱ 45 ث</string>
+    <string name="msg_deleted">تم حذف التذكير.</string>
+
+    <!-- Interactions : textes bilingues affichés ensemble -->
+    <string name="interaction_title">التحقق من تفاعل دوائي</string>
+    <string name="interaction_intro">أدخل اسمي دواءين (أسماء علمية بالإنجليزية، مثل warfarin أو aspirin).</string>
+    <string name="interaction_drug_a_hint">الدواء الأول</string>
+    <string name="interaction_drug_b_hint">الدواء الثاني</string>
+    <string name="interaction_check_button">تحقق</string>
+    <string name="interaction_error_empty">أدخل اسمي الدواءين.</string>
+    <string name="result_label_fr">FR</string>
+    <string name="result_label_ar">AR</string>
+    <string name="result_missing_fr">Médicament introuvable dans la base consultée : %1$s. Essayez le nom générique (DCI) en anglais.</string>
+    <string name="result_missing_ar">الدواء غير موجود في القاعدة المستشارة: %1$s. جرّب الاسم العلمي (DCI) بالإنجليزية.</string>
+    <string name="result_found_fr">Une interaction entre %1$s et %2$s est mentionnée dans la notice consultée.</string>
+    <string name="result_found_ar">يُذكر تفاعل بين %1$s و%2$s في النشرة الدوائية المستشارة.</string>
+    <string name="result_no_mention_fr">Aucune interaction entre %1$s et %2$s n\'est mentionnée dans les notices consultées.</string>
+    <string name="result_no_mention_ar">لم يُذكر أي تفاعل بين %1$s و%2$s في النشرات الدوائية المستشارة.</string>
+    <string name="result_no_risk_warning_fr">Attention : cela ne signifie pas qu\'il n\'y a aucun risque. Les données disponibles peuvent être incomplètes.</string>
+    <string name="result_no_risk_warning_ar">تنبيه: لا يعني هذا أنه لا توجد أي مخاطر. قد تكون البيانات المتاحة غير كاملة.</string>
+    <string name="result_disclaimer_fr">Ces résultats ne remplacent pas l\'avis d\'un médecin ou d\'un pharmacien. Ne modifiez jamais un traitement sans avis médical.</string>
+    <string name="result_disclaimer_ar">هذه النتائج لا تغني عن رأي الطبيب أو الصيدلي. لا تغير أي دواء دون استشارة طبية.</string>
+    <string name="result_source_label">مقتطف من النشرة الدوائية (المصدر: openFDA)</string>
+    <string name="result_translation_pending">جارٍ الترجمة…</string>
+    <string name="result_translation_failed">الترجمة غير متاحة: راجع النص المصدر.</string>
+    <string name="result_http_error">خدمة المعلومات غير متاحة مؤقتًا (الرمز %1$d).</string>
+    <string name="result_error_network_fr">Erreur réseau : vérifiez votre connexion puis réessayez.</string>
+    <string name="result_error_network_ar">خطأ في الاتصال: تحقق من اتصالك ثم أعد المحاولة.</string>
+    <string name="result_error_empty_fr">Réponse vide ou incorrecte du service d\'informations.</string>
+    <string name="result_error_empty_ar">استجابة فارغة أو غير صحيحة من خدمة المعلومات.</string>
+    <string name="result_error_http_fr">Service indisponible (code %1$d). Réessayez plus tard.</string>
+    <string name="result_error_http_ar">الخدمة غير متاحة (الرمز %1$d). أعد المحاولة لاحقًا.</string>
+
+    <!-- Paramètres -->
+    <string name="settings_title">الإعدادات</string>
+    <string name="settings_language_section">لغة التطبيق</string>
+    <string name="settings_language_system">لغة الجهاز</string>
+    <string name="settings_language_fr">Français</string>
+    <string name="settings_language_ar">العربية</string>
+    <string name="settings_account_section">الحساب</string>
+    <string name="settings_logged_as">متصل باسم</string>
+    <string name="settings_logout">تسجيل الخروج</string>
+    <string name="settings_notifications_section">الإشعارات</string>
+    <string name="settings_notification_permission">السماح بالإشعارات</string>
+    <string name="settings_notification_state_on">الإشعارات مسموحة</string>
+    <string name="settings_notification_state_off">الإشعارات غير مسموحة</string>
+    <string name="settings_notification_hint">يُرسل إشعار بعد 45 ثانية من كل عملية حفظ.</string>
+    <string name="settings_language_saved">تم تحديث اللغة.</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel_name">تذكيرات الأدوية</string>
+    <string name="notif_channel_desc">إشعارات تذكير بتناول الدواء</string>
+    <string name="notif_title">تذكير بتناول الدواء</string>
+    <string name="notif_message">حان وقت تناول الدواء: %1$s.</string>
+
+    <!-- Erreurs de l'authentification locale -->
+    <string name="auth_error_invalid_email">البريد الإلكتروني غير صالح.</string>
+    <string name="auth_error_weak_password">كلمة المرور ضعيفة (8 أحرف على الأقل، حرف ورقم).</string>
+    <string name="auth_error_user_not_found">لا يوجد حساب مرتبط بهذا البريد الإلكتروني.</string>
+    <string name="auth_error_bad_password">كلمة المرور غير صحيحة.</string>
+    <string name="auth_error_email_in_use">هذا البريد مستخدم بالفعل.</string>
+    <string name="auth_error_too_many_requests">محاولات كثيرة. أعد المحاولة بعد دقائق.</string>
+    <string name="auth_error_network">خطأ في الاتصال: تحقق من اتصالك.</string>
+    <string name="auth_error_storage">خطأ في التخزين المحلي.</string>
+    <string name="auth_error_invalid_credentials">البريد الإلكتروني أو كلمة المرور غير صحيحة.</string>
+    <string name="auth_error_user_disabled">تم تعطيل هذا الحساب.</string>
+    <string name="auth_error_operation_not_allowed">تسجيل الدخول غير مسموح لهذا الحساب.</string>
+</resources>
