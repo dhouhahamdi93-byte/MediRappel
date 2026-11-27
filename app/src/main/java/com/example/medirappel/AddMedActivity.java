@@ -68,12 +68,13 @@ public class AddMedActivity extends SecureActivity {
     }
 
     private void save() {
-        String name = etName.getText() == null ? "" : etName.getText().toString().trim();
+        String rawName = etName.getText() == null ? "" : etName.getText().toString();
+        String name = MedicationNameValidator.normalize(rawName);
         String description = etDescription.getText() == null
                 ? "" : etDescription.getText().toString().trim();
 
         tilName.setError(null);
-        if (name.isEmpty()) {
+        if (!MedicationNameValidator.isValid(rawName)) {
             tilName.setError(getString(R.string.add_error_name));
             return;
         }
