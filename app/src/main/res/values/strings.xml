@@ -49,7 +49,7 @@
     <string name="main_interactions_button">Vérifier une interaction</string>
     <string name="main_settings_button">Paramètres</string>
     <string name="main_logout_button">Déconnexion</string>
-    <string name="main_empty">Aucun rappel pour le moment.\nAppuyez sur + pour en créer un.</string>
+    <string name="main_empty">Aucun médicament pour le moment. Appuyez sur + pour en ajouter.</string>
     <string name="main_add_reminder">Nouveau rappel</string>
     <string name="main_logout_success">Vous êtes déconnecté.</string>
 

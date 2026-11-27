@@ -49,7 +49,7 @@
     <string name="main_interactions_button">التحقق من تفاعل دوائي</string>
     <string name="main_settings_button">الإعدادات</string>
     <string name="main_logout_button">تسجيل الخروج</string>
-    <string name="main_empty">لا توجد تذكيرات حاليًا.\nاضغط على + لإنشاء تذكير.</string>
+    <string name="main_empty">لا يوجد أي دواء حاليًا. اضغط على + لإضافة دواء.</string>
     <string name="main_add_reminder">تذكير جديد</string>
     <string name="main_logout_success">تم تسجيل الخروج.</string>
 
